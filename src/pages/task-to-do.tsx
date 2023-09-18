@@ -1,20 +1,21 @@
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_ALL_TASKS } from "../GraphQL/Queries";
-import { UPDATE_TASK } from "../GraphQL/Mutation";
+//import { UPDATE_TASK } from "../GraphQL/Mutation";
 import Form from "../components/Form";
+import Task from "../components/Task";
 
 function Tasktodo() {
   const { data } = useQuery(GET_ALL_TASKS);
-  const [updateTask] = useMutation(UPDATE_TASK);
+  //const [updateTask] = useMutation(UPDATE_TASK);
 
-  const handleTaskCompletion = (task: Task) => {
-    updateTask({
-      variables: {
-        id: task._id,
-        status: true, // Mettre à jour le statut à "terminée"
-      },
-    });
-  };
+  // const handleTaskCompletion = (task: Task) => {
+  //   updateTask({
+  //     variables: {
+  //       id: task._id,
+  //       status: true, // Mettre à jour le statut à "terminée"
+  //     },
+  //   });
+  // };
 
   interface Task {
     _id: string;
@@ -31,7 +32,6 @@ function Tasktodo() {
 
   // Je Sépare les tâches en cours des tâches terminées
   const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
-
   const completedTasks = sortedTasks?.filter((task: Task) => task.status);
 
   console.log(tasksInProgress);
@@ -41,26 +41,13 @@ function Tasktodo() {
       <h2>les tâches en cours</h2>
       <ul>
         {tasksInProgress?.map((task: Task) => (
-          <li key={task._id}>
-            {task.description} - {task.status ? "Terminée" : "En cours"}
-            <button
-              className="border p-2"
-              onClick={() => {
-                handleTaskCompletion(task);
-              }}
-            >
-              tâche terminer ?
-            </button>
-          </li>
+          <Task key={task._id} task={task} />
         ))}
       </ul>
       <h2>les tâches terminées</h2>
-
       <ul>
         {completedTasks?.map((task: Task) => (
-          <li key={task._id}>
-            {task.description} - {task.status ? "Terminée" : "En cours"}
-          </li>
+          <Task key={task._id} task={task} />
         ))}
       </ul>
       <Form />
