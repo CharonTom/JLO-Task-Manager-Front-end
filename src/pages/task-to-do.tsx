@@ -1,56 +1,70 @@
-import React from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_TASK } from "../GraphQL/Mutation";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_ALL_TASKS } from "../GraphQL/Queries";
-import { useState, ChangeEvent } from "react";
+import { UPDATE_TASK } from "../GraphQL/Mutation";
+import Form from "../components/Form";
 
 function Tasktodo() {
-  const initialValues = {
-    description: "",
-    // status: "",
-  };
-  const [createTask, { error }] = useMutation(CREATE_TASK);
   const { data } = useQuery(GET_ALL_TASKS);
+  const [updateTask] = useMutation(UPDATE_TASK);
 
-  if (data) {
-    console.log(data);
+  const handleTaskCompletion = (task: Task) => {
+    updateTask({
+      variables: {
+        id: task._id,
+        status: true, // Mettre à jour le statut à "terminée"
+      },
+    });
+  };
+
+  interface Task {
+    _id: string;
+    description: string;
+    status: boolean;
+    createdAt: number;
   }
 
-  const [formValues, setFormvalues] = useState(initialValues);
+  const sortedTasks = data?.getAllTasks
+    .slice()
+    .sort((taskA: Task, taskB: Task) => {
+      return taskB.createdAt - taskA.createdAt;
+    });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormvalues({ ...formValues, [name]: value });
-  };
+  // Je Sépare les tâches en cours des tâches terminées
+  const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
 
-  const handleForm = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const completedTasks = sortedTasks?.filter((task: Task) => task.status);
+
+  console.log(tasksInProgress);
   return (
-    <>
-      <form className="main__form" onSubmit={handleForm}>
-        <h1>Login</h1>
+    <section className="container mx-auto py-10">
+      <h1 className="text-center">Tâches en cours</h1>
+      <h2>les tâches en cours</h2>
+      <ul>
+        {tasksInProgress?.map((task: Task) => (
+          <li key={task._id}>
+            {task.description} - {task.status ? "Terminée" : "En cours"}
+            <button
+              className="border p-2"
+              onClick={() => {
+                handleTaskCompletion(task);
+              }}
+            >
+              tâche terminer ?
+            </button>
+          </li>
+        ))}
+      </ul>
+      <h2>les tâches terminées</h2>
 
-        <div className="main__form__input">
-          <input
-            type="text"
-            name="description"
-            placeholder="description"
-            onChange={handleChange}
-            value={formValues.description}
-          />
-        </div>
-
-        <button
-          className="button"
-          onClick={() => {
-            createTask({ variables: { description: formValues.description } });
-          }}
-        >
-          Create a Task
-        </button>
-      </form>
-    </>
+      <ul>
+        {completedTasks?.map((task: Task) => (
+          <li key={task._id}>
+            {task.description} - {task.status ? "Terminée" : "En cours"}
+          </li>
+        ))}
+      </ul>
+      <Form />
+    </section>
   );
 }
 

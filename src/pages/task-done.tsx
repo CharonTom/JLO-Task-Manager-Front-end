@@ -1,7 +1,7 @@
 import React from "react";
 
 function Taskdone() {
-  return <div>T</div>;
+  return <div>Tâche terminé</div>;
 }
 
 export default Taskdone;
