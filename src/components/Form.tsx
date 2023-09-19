@@ -17,6 +17,7 @@ function Form() {
 
   const { data } = useQuery(GET_ALL_TAGS); // On récupère les tags dans la DBB
 
+  const [error, setError] = useState<string | null>("");
   const [formValues, setFormvalues] = useState(initialValues);
   const [createTask] = useMutation(CREATE_TASK, {
     refetchQueries: [{ query: GET_ALL_TASKS }],
@@ -25,6 +26,7 @@ function Form() {
   const handleDescChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormvalues({ ...formValues, [name]: value });
+    setError(null);
   };
 
   const handleTagChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,16 +49,24 @@ function Form() {
 
   const handleForm = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formValues.description.trim() === "") {
+      setError("La description ne peut pas être vide.");
+      return;
+    }
 
-    // Créez une tâche en utilisant les valeurs du formulaire, y compris les groupes sélectionnés
+    if (formValues.description.length > 40) {
+      setError("La description ne peut pas dépasser 40 caractères.");
+      return;
+    }
+    setFormvalues(initialValues);
+    setError(null);
+
     await createTask({
       variables: {
         description: formValues.description,
         tags: formValues.tags,
       },
     });
-    // Réinitialisez le formulaire après la création de la tâche
-    //setFormvalues(initialValues);
   };
 
   return (
@@ -82,6 +92,7 @@ function Form() {
           onChange={handleDescChange}
           value={formValues.description}
         />
+        {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
       </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
