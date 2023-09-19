@@ -2,20 +2,21 @@
 import { useMutation } from "@apollo/client";
 import { UPDATE_TASK } from "../GraphQL/Mutation";
 
+interface Task {
+  _id: string;
+  description: string;
+  status: boolean;
+  createdAt: number;
+  tags: Array<{ _id: string; name: string; colorCode: string }>;
+}
 interface TaskProps {
   task: {
     _id: string;
     description: string;
     status: boolean;
     createdAt: number;
+    tags: Array<{ _id: string; name: string; colorCode: string }>;
   };
-}
-
-interface Task {
-  _id: string;
-  description: string;
-  status: boolean;
-  createdAt: number;
 }
 
 function Task({ task }: TaskProps) {
@@ -32,13 +33,31 @@ function Task({ task }: TaskProps) {
 
   return (
     <div>
-      <li className="" key={task._id}>
-        {task.description} - {task.status ? "Terminée" : "En cours"}
+      <li
+        className="flex items-center justify-between border-b border-gray-300 py-2"
+        key={task._id}
+      >
+        {task.description}
+        <div className="flex space-x-2 mt-2">
+          {task.tags.map((tag) => (
+            <span
+              key={tag._id}
+              className={`px-2 py-1 text-black bg-${tag.colorCode}-500 rounded`}
+            >
+              {tag.name}
+            </span>
+          ))}
+        </div>
+        {task.status ? (
+          <p className="text-red-700 font-semibold">Terminé</p>
+        ) : (
+          <p className="text-green-700 font-semibold">En cours</p>
+        )}
         {task.status ? (
           ""
         ) : (
           <button
-            className="border p-2"
+            className="text-blue-500 hover:text-blue-700 ml-2 focus:outline-none"
             onClick={() => {
               handleTaskCompletion(task);
             }}
