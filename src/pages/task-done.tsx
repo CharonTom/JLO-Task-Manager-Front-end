@@ -1,8 +1,9 @@
 import { DELETE_TRUE_TASKS } from "../GraphQL/Mutation";
 import Task from "../components/Task";
-
+import { useState } from "react";
 import { GET_ALL_TASKS } from "../GraphQL/Queries";
 import { useQuery, useMutation } from "@apollo/client";
+import Modale from "../components/Modale";
 
 function Taskdone() {
   interface Task {
@@ -17,10 +18,10 @@ function Taskdone() {
     }[];
   }
 
-  const { data } = useQuery(GET_ALL_TASKS);
-  const [deleteTrueTasks] = useMutation(DELETE_TRUE_TASKS, {
-    refetchQueries: [{ query: GET_ALL_TASKS }],
-  });
+  const { data, refetch } = useQuery(GET_ALL_TASKS);
+  const [deleteTrueTasks] = useMutation(DELETE_TRUE_TASKS);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const sortedTasks = data?.getAllTasks
     .slice()
@@ -29,6 +30,20 @@ function Taskdone() {
     });
 
   const completedTasks = sortedTasks?.filter((task: Task) => task.status);
+
+  const handleDelete = () => {
+    if (completedTasks.length > 0) {
+      deleteTrueTasks();
+      setIsSubmit(true);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsSubmit(false);
+    refetch();
+  };
 
   return (
     <section>
@@ -46,14 +61,20 @@ function Taskdone() {
 
         <button
           className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 mt-4 border rounded-lg disabled:bg-gray-300"
-          onClick={() => {
-            deleteTrueTasks();
-          }}
+          onClick={handleDelete}
           disabled={!completedTasks || completedTasks.length === 0}
         >
           Tout supprimer
         </button>
       </div>
+      {isModalOpen && isSubmit && (
+        <div>
+          <Modale
+            message="Les tâches terminées ont bien été supprimées !"
+            onClose={handleCloseModal}
+          />
+        </div>
+      )}
     </section>
   );
 }

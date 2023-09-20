@@ -1,6 +1,9 @@
-//import React from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TASK } from "../GraphQL/Mutation";
+import { GET_ALL_TASKS } from "../GraphQL/Queries";
+
+import { useState } from "react";
+import Modale from "./Modale";
 
 interface Task {
   _id: string;
@@ -20,9 +23,17 @@ interface TaskProps {
 }
 
 function Task({ task }: TaskProps) {
-  const [updateTask] = useMutation(UPDATE_TASK);
+  const [updateTask] = useMutation(UPDATE_TASK, {
+    fetchPolicy: "no-cache", // La page se rafraichit automatiquement ce qui fait sauté la modale. Empécher le cache permet que la page ne se rafraichisse pas
+  });
+
+  const { refetch } = useQuery(GET_ALL_TASKS);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleTaskCompletion = (task: Task) => {
+    setIsSubmit(true);
+    setIsModalOpen(true);
     updateTask({
       variables: {
         id: task._id,
@@ -31,6 +42,13 @@ function Task({ task }: TaskProps) {
     });
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsSubmit(false);
+    refetch();
+  };
+
+  console.log(task.tags);
   return (
     <div>
       <li
@@ -57,6 +75,7 @@ function Task({ task }: TaskProps) {
           ""
         ) : (
           <button
+            type="button"
             className="text-blue-500 hover:text-blue-700 ml-2 focus:outline-none"
             onClick={() => {
               handleTaskCompletion(task);
@@ -66,6 +85,14 @@ function Task({ task }: TaskProps) {
           </button>
         )}
       </li>
+      {isModalOpen && isSubmit && (
+        <div>
+          <Modale
+            message="La tâche a bien été validée !"
+            onClose={handleCloseModal}
+          />
+        </div>
+      )}
     </div>
   );
 }

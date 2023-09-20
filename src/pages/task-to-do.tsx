@@ -17,6 +17,7 @@ function Tasktodo() {
       colorCode: string;
     }[];
   }
+
   const sortedTasks = data?.getAllTasks
     .slice()
     .sort((taskA: Task, taskB: Task) => {
@@ -26,10 +27,10 @@ function Tasktodo() {
   // Je Sépare les tâches en cours des tâches terminées
   const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
 
-  //console.log(tasksInProgress);
   return (
     <section className="container mx-auto py-10">
       <h1 className="text-center text-4xl mb-5">Tâches en cours</h1>
+
       {tasksInProgress?.length === 0 ? (
         <p className="text-center">Il n'y a aucune tâche en cours.</p>
       ) : (
@@ -39,7 +40,6 @@ function Tasktodo() {
           ))}
         </ul>
       )}
-
       <Form />
     </section>
   );
