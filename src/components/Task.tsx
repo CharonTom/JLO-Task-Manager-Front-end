@@ -50,40 +50,42 @@ function Task({ task }: TaskProps) {
 
   console.log(task.tags);
   return (
-    <div>
-      <li
-        className="flex items-center justify-between border-b border-gray-300 py-2"
-        key={task._id}
-      >
-        {task.description}
-        <div className="flex space-x-2 mt-2">
-          {task.tags.map((tag) => (
-            <span
-              key={tag._id}
-              className={`px-2 py-1 text-black bg-${tag.colorCode}-500 rounded`}
-            >
-              {tag.name}
-            </span>
-          ))}
+    <>
+      <li className="border-b border-gray-300 py-2 flex items-center justify-between">
+        <div className="flex gap-x-6 items-center flex-wrap" key={task._id}>
+          {task.description}
+          <div className="flex flex-wrap gap-1 space-x-2 mt-2">
+            {task.tags.map((tag) => (
+              <span
+                key={tag._id}
+                style={{ backgroundColor: tag.colorCode }}
+                className={`px-2 py-1 text-black text-xs lg:text-base rounded w-max`}
+              >
+                {tag.name}
+              </span>
+            ))}
+          </div>
         </div>
-        {task.status ? (
-          <p className="text-red-700 font-semibold">Terminé</p>
-        ) : (
-          <p className="text-green-700 font-semibold">En cours</p>
-        )}
-        {task.status ? (
-          ""
-        ) : (
-          <button
-            type="button"
-            className="text-blue-500 hover:text-blue-700 ml-2 focus:outline-none"
-            onClick={() => {
-              handleTaskCompletion(task);
-            }}
-          >
-            Valider
-          </button>
-        )}
+        <div className="flex items-center gap-x-6">
+          {task.status ? (
+            <p className="text-red-700 font-semibold">Terminé</p>
+          ) : (
+            <p className="text-green-700 font-semibold w-max">En cours</p>
+          )}
+          {task.status ? (
+            ""
+          ) : (
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold lg:py-2 lg:px-4 py-1 px-2 rounded-lg"
+              onClick={() => {
+                handleTaskCompletion(task);
+              }}
+            >
+              Valider
+            </button>
+          )}
+        </div>
       </li>
       {isModalOpen && isSubmit && (
         <div>
@@ -93,7 +95,7 @@ function Task({ task }: TaskProps) {
           />
         </div>
       )}
-    </div>
+    </>
   );
 }
 

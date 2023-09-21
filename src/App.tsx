@@ -9,6 +9,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import Settings from "./pages/Settings";
 
 function App() {
   const rooter = createBrowserRouter(
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<Layouts />}>
         <Route index path="/" element={<Tasktodo />} />
         <Route path="/done" element={<Taskdone />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
     )
   );

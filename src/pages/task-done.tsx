@@ -46,27 +46,28 @@ function Taskdone() {
   };
 
   return (
-    <section>
-      <div className="container mx-auto py-10">
-        <h1 className="text-center text-4xl mb-5">Tâches terminés</h1>
-        {completedTasks?.length === 0 ? (
-          <p className="text-center">Il n'y a aucune tâche de terminée.</p>
-        ) : (
-          <ul className="space-y-3">
-            {completedTasks?.map((task: Task) => (
-              <Task key={task._id} task={task} />
-            ))}
-          </ul>
-        )}
+    <section className="container mx-auto p-10">
+      <h1 className="text-center text-4xl mb-5">Tâches terminées</h1>
+      {completedTasks?.length === 0 ? (
+        <p className="text-center text-red-700">
+          Il n'y a aucune tâche de terminée.
+        </p>
+      ) : (
+        <ul className="space-y-3">
+          {completedTasks?.map((task: Task) => (
+            <Task key={task._id} task={task} />
+          ))}
+        </ul>
+      )}
 
-        <button
-          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 mt-4 border rounded-lg disabled:bg-gray-300"
-          onClick={handleDelete}
-          disabled={!completedTasks || completedTasks.length === 0}
-        >
-          Tout supprimer
-        </button>
-      </div>
+      <button
+        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 m-6 border rounded-lg disabled:bg-gray-300"
+        onClick={handleDelete}
+        disabled={!completedTasks || completedTasks.length === 0}
+      >
+        Tout supprimer
+      </button>
+
       {isModalOpen && isSubmit && (
         <div>
           <Modale

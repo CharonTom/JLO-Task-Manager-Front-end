@@ -28,11 +28,13 @@ function Tasktodo() {
   const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
 
   return (
-    <section className="container mx-auto py-10">
+    <section className="container mx-auto p-10">
       <h1 className="text-center text-4xl mb-5">Tâches en cours</h1>
 
       {tasksInProgress?.length === 0 ? (
-        <p className="text-center">Il n'y a aucune tâche en cours.</p>
+        <p className="text-center text-red-700">
+          Il n'y a aucune tâche en cours.
+        </p>
       ) : (
         <ul className="space-y-3">
           {tasksInProgress?.map((task: Task) => (

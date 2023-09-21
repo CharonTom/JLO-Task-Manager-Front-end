@@ -83,14 +83,14 @@ function Form() {
         className="mt-6 max-w-md mx-auto p-4 bg-gray-200 shadow-md rounded-lg"
         onSubmit={handleForm}
       >
-        <h2>Ajouter une tâche</h2>
+        <h2 className="text-center">Ajouter une tâche</h2>
         <br />
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="description"
           >
-            Description de la tâche
+            Description :
           </label>
           <input
             className="w-full px-3 py-2 border rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -105,7 +105,7 @@ function Form() {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Groupes
+            Groupes :
           </label>
           <div className="space-y-2">
             {data?.getAllTags.map((tag: Tag) => (
