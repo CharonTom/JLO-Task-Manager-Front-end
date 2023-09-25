@@ -8,14 +8,24 @@
 
 @layer base {
   :root {
-    --bg-color: red;
+    --fill-color: #ffffff;
+    --fill-color-variant: rgba(198, 216, 255, 0.6);
   }
 
-  .theme-blue {
-    --bg-color: blue;
+  .theme-red {
+    --fill-color: #ffe6e6;
+    --fill-color-variant: #ffddd4;
   }
-  .theme-green {
-    --bg-color: green;
+  .theme-yellow {
+    --fill-color: #f8ffc0;
+    --fill-color-variant: #e1fc98;
+  }
+
+  .section {
+    @apply py-10 min-h-screen container mx-auto;
+  }
+  h1 {
+    @apply text-center text-4xl mb-5;
   }
 }
 

@@ -14,9 +14,10 @@ export default {
       xl: "1440px",
     },
     extend: {
-      BgColor: {
+      backgroundColor: {
         skin: {
-          base: "var(--bg-color)",
+          fill: "var(--fill-color)",
+          variant: "var(--fill-color-variant)",
         },
       },
     },

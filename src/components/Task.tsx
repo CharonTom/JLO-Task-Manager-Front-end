@@ -51,7 +51,7 @@ function Task({ task }: TaskProps) {
   console.log(task.tags);
   return (
     <>
-      <li className="border-b border-gray-300 py-2 flex items-center justify-between">
+      <li className="border-b border-black py-2 flex items-center justify-between">
         <div className="flex gap-x-6 items-center flex-wrap" key={task._id}>
           {task.description}
           <div className="flex flex-wrap gap-1 space-x-2 mt-2">

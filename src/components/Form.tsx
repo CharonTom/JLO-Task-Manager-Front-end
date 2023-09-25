@@ -80,7 +80,7 @@ function Form() {
   return (
     <div>
       <form
-        className="mt-6 max-w-md mx-auto p-4 bg-gray-200 shadow-md rounded-lg"
+        className="mt-6 max-w-md mx-auto p-4 bg-skin-variant shadow-md rounded-lg"
         onSubmit={handleForm}
       >
         <h2 className="text-center">Ajouter une tâche</h2>

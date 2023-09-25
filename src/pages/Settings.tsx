@@ -2,10 +2,11 @@ import ColorPicker from "../components/ThemePicker";
 
 function Settings() {
   return (
-    <section>
-      <h1 className="text-skin-base">Settings</h1>
-      <p>Current Theme</p>
-      <ColorPicker />
+    <section className="section">
+      <div className="flex flex-col items-center">
+        <h1>Settings</h1>
+        <ColorPicker />
+      </div>
     </section>
   );
 }

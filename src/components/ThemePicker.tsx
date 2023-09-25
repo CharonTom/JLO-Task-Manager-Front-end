@@ -8,13 +8,20 @@ const ThemeSelector = () => {
     toggleTheme(newTheme);
   };
 
-  // console.log(theme);
-
   return (
     <div>
-      <button onClick={() => handleThemeChange("blue")}>Bleu</button>
-      <button onClick={() => handleThemeChange("red")}>Rouge</button>
-      <button onClick={() => handleThemeChange("yellow")}>Jaune</button>
+      <button
+        className="w-10 h-10 bg-blue-200 m-2 border border-1 border-black rounded-full"
+        onClick={() => handleThemeChange("")}
+      ></button>
+      <button
+        className="w-10 h-10 bg-red-200 m-2 border border-1 border-black rounded-full"
+        onClick={() => handleThemeChange("theme-red")}
+      ></button>
+      <button
+        className="w-10 h-10 bg-yellow-200 m-2 border border-1 border-black rounded-full"
+        onClick={() => handleThemeChange("theme-yellow")}
+      ></button>
     </div>
   );
 };

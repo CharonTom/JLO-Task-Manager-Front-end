@@ -27,15 +27,7 @@ function App() {
   );
 
   return (
-    <div
-      className={
-        theme === "blue"
-          ? "bg-blue-200"
-          : theme === "red"
-          ? "bg-red-200"
-          : "bg-yellow-200"
-      }
-    >
+    <div className={`bg-skin-fill ${theme}`}>
       <RouterProvider router={rooter} />
     </div>
   );

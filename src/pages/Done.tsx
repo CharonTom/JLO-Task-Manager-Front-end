@@ -46,8 +46,8 @@ function Taskdone() {
   };
 
   return (
-    <section className="container mx-auto p-10">
-      <h1 className="text-center text-4xl mb-5">Tâches terminées</h1>
+    <section className="section">
+      <h1>Tâches terminées</h1>
       {completedTasks?.length === 0 ? (
         <p className="text-center text-red-700">
           Il n'y a aucune tâche de terminée.

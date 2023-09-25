@@ -28,8 +28,8 @@ function Tasktodo() {
   const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
 
   return (
-    <section className="container mx-auto p-10">
-      <h1 className="text-center text-4xl mb-5">Tâches en cours</h1>
+    <section className="section">
+      <h1>Tâches en cours</h1>
 
       {tasksInProgress?.length === 0 ? (
         <p className="text-center text-red-700">
