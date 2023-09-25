@@ -13,7 +13,13 @@ export default {
       lg: "1024px",
       xl: "1440px",
     },
-    extend: {},
+    extend: {
+      BgColor: {
+        skin: {
+          base: "var(--bg-color)",
+        },
+      },
+    },
   },
   plugins: [],
 };

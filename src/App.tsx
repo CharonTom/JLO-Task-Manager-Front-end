@@ -1,8 +1,9 @@
-import Tasktodo from "./pages/task-to-do";
-import Taskdone from "./pages/task-done";
+import Tasktodo from "./pages/ToDo";
+import Taskdone from "./pages/Done";
 import Layouts from "./layout/Layouts";
 import "./App.css";
-
+import { useContext } from "react";
+import { ThemeContext } from "./context/ThemeContext";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -12,6 +13,9 @@ import {
 import Settings from "./pages/Settings";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
+  console.log(theme);
+
   const rooter = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layouts />}>
@@ -22,7 +26,19 @@ function App() {
     )
   );
 
-  return <RouterProvider router={rooter} />;
+  return (
+    <div
+      className={
+        theme === "blue"
+          ? "bg-blue-200"
+          : theme === "red"
+          ? "bg-red-200"
+          : "bg-yellow-200"
+      }
+    >
+      <RouterProvider router={rooter} />
+    </div>
+  );
 }
 
 export default App;

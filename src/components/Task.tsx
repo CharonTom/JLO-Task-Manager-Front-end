@@ -77,7 +77,7 @@ function Task({ task }: TaskProps) {
           ) : (
             <button
               type="button"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold lg:py-2 lg:px-4 py-1 px-2 rounded-lg"
+              className="btn-blue lg:py-2 lg:px-4 py-1 px-2"
               onClick={() => {
                 handleTaskCompletion(task);
               }}
