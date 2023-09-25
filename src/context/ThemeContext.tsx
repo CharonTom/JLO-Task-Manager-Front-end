@@ -1,12 +1,20 @@
 import { createContext, useState, useEffect } from "react";
 
-export const ThemeContext = createContext();
+interface ThemeContextType {
+  theme: string;
+  toggleTheme: (newTheme: string) => void;
+}
 
-export function ThemeProvider({ children }) {
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: "",
+  toggleTheme: () => {},
+});
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const initialTheme = localStorage.getItem("selectedTheme") || "";
   const [theme, setTheme] = useState(initialTheme);
 
-  const toggleTheme = (newTheme) => {
+  const toggleTheme = (newTheme: string) => {
     setTheme(newTheme);
   };
   useEffect(() => {

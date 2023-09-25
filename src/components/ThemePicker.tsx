@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 const ThemeSelector = () => {
-  const { toggleTheme, theme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
 
-  const handleThemeChange = (newTheme) => {
+  const handleThemeChange = (newTheme: string) => {
     toggleTheme(newTheme);
   };
 

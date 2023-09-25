@@ -13,11 +13,11 @@
   }
 
   .theme-red {
-    --fill-color: #ffe6e6;
+    --fill-color: #feecec;
     --fill-color-variant: #ffddd4;
   }
   .theme-yellow {
-    --fill-color: #f8ffc0;
+    --fill-color: #faffd0;
     --fill-color-variant: #e1fc98;
   }
 
