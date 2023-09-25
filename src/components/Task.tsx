@@ -48,7 +48,6 @@ function Task({ task }: TaskProps) {
     refetch();
   };
 
-  console.log(task.tags);
   return (
     <>
       <li className="border-b border-black py-2 flex items-center justify-between">
@@ -68,7 +67,7 @@ function Task({ task }: TaskProps) {
         </div>
         <div className="flex items-center gap-x-6">
           {task.status ? (
-            <p className="text-red-700 font-semibold">Terminé</p>
+            <p className="text-red-700 font-semibold">Terminée</p>
           ) : (
             <p className="text-green-700 font-semibold w-max">En cours</p>
           )}

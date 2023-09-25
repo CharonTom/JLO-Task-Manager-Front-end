@@ -24,7 +24,6 @@ function Tasktodo() {
       return taskB.createdAt - taskA.createdAt;
     });
 
-  // Je Sépare les tâches en cours des tâches terminées
   const tasksInProgress = sortedTasks?.filter((task: Task) => !task.status);
 
   return (

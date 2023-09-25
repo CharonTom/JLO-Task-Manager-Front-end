@@ -4,7 +4,7 @@ function Nav() {
   return (
     <nav className="">
       <NavLink to="/settings" className="mx-2 active:text-blue-500">
-        Settings
+        Paramètres
       </NavLink>
       <NavLink to="/" className="mx-2 active:text-blue-500">
         En cours

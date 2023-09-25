@@ -14,7 +14,6 @@ import Settings from "./pages/Settings";
 
 function App() {
   const { theme } = useContext(ThemeContext);
-  console.log(theme);
 
   const rooter = createBrowserRouter(
     createRoutesFromElements(

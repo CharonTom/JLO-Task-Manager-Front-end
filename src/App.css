@@ -24,6 +24,7 @@
   .section {
     @apply py-10 min-h-screen container mx-auto;
   }
+
   h1 {
     @apply text-center text-4xl mb-5;
   }
