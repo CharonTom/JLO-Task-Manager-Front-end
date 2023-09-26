@@ -14,11 +14,11 @@
 
   .theme-red {
     --fill-color: #feecec;
-    --fill-color-variant: #ffddd4;
+    --fill-color-variant: #fdcec1d8;
   }
   .theme-yellow {
     --fill-color: #faffd0;
-    --fill-color-variant: #e1fc98;
+    --fill-color-variant: #fff784c9;
   }
 
   .section {

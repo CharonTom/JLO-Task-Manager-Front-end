@@ -5,8 +5,8 @@ interface ModaleProps {
 
 function Modale({ message, onClose }: ModaleProps) {
   return (
-    <div>
-      <div className="p-5 fixed p-2 rounded-md border bg-white border-black text-secondary border w-fit left-1/2 top-1/2 z-20 flex flex-col transform -translate-x-1/2">
+    <div className="bg-skin-variant fixed top-0 left-0 w-screen h-screen flex items-center justify-center ">
+      <div className="p-5 p-2 rounded-md bg-skin-fill flex flex-col shadow-lg">
         <p className="">{message}</p>
         <button
           className="btn-blue w-fit mx-auto mt-4 py-2 px-4 "
