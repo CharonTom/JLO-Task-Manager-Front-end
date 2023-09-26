@@ -4,7 +4,7 @@ import { GET_ALL_TASKS } from "../GraphQL/Queries";
 import { useQuery } from "@apollo/client";
 
 function Tasktodo() {
-  const { data } = useQuery(GET_ALL_TASKS);
+  const { data, loading, error } = useQuery(GET_ALL_TASKS);
 
   interface Task {
     _id: string;
@@ -29,7 +29,12 @@ function Tasktodo() {
   return (
     <section className="section">
       <h1>Tâches en cours</h1>
-
+      {loading && <p className="text-center">Loading...</p>}
+      {error && (
+        <p className="text-center text-red-700">
+          Nous rencontrons un problème de connection avec le serveur
+        </p>
+      )}
       {tasksInProgress?.length === 0 ? (
         <p className="text-center text-red-700">
           Il n'y a aucune tâche en cours.

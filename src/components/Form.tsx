@@ -19,6 +19,8 @@ function Form() {
     tags: [] as string[],
   };
 
+  console.log("data:", data);
+
   const [formValues, setFormvalues] = useState(initialValues);
   const [error, setError] = useState<string | null>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -123,7 +125,11 @@ function Form() {
             ))}
           </div>
         </div>
-        <button type="submit" className="btn-blue py-2 px-4 ">
+        <button
+          type="submit"
+          disabled={!data}
+          className="btn-blue py-2 px-4 disabled:bg-gray-300 "
+        >
           Créer une tâche
         </button>
       </form>

@@ -18,7 +18,7 @@ function Taskdone() {
     }[];
   }
 
-  const { data, refetch } = useQuery(GET_ALL_TASKS);
+  const { data, refetch, loading, error } = useQuery(GET_ALL_TASKS);
   const [deleteTrueTasks] = useMutation(DELETE_TRUE_TASKS);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -48,6 +48,12 @@ function Taskdone() {
   return (
     <section className="section">
       <h1>Tâches terminées</h1>
+      {loading && <p className="text-center">Loading...</p>}
+      {error && (
+        <p className="text-center text-red-700">
+          Nous rencontrons un problème de connection avec le serveur
+        </p>
+      )}
       {completedTasks?.length === 0 ? (
         <p className="text-center text-red-700">
           Il n'y a aucune tâche de terminée.
