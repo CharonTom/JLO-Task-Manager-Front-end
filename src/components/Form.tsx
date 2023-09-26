@@ -19,8 +19,6 @@ function Form() {
     tags: [] as string[],
   };
 
-  console.log("data:", data);
-
   const [formValues, setFormvalues] = useState(initialValues);
   const [error, setError] = useState<string | null>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,8 +54,8 @@ function Form() {
       return;
     }
 
-    if (formValues.description.length > 40) {
-      setError("La description ne peut pas dépasser 40 caractères.");
+    if (formValues.description.length > 60) {
+      setError("La description ne peut pas dépasser 60 caractères.");
       return;
     }
     setFormvalues(initialValues);
