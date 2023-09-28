@@ -1,9 +1,8 @@
 import { DELETE_TRUE_TASKS } from "../GraphQL/Mutation";
 import Task from "../components/Task";
-import { useState } from "react";
 import { GET_ALL_TASKS } from "../GraphQL/Queries";
 import { useQuery, useMutation } from "@apollo/client";
-import Modale from "../components/Modale";
+import { toast } from "react-toastify";
 
 function Taskdone() {
   interface Task {
@@ -20,8 +19,6 @@ function Taskdone() {
 
   const { data, refetch, loading, error } = useQuery(GET_ALL_TASKS);
   const [deleteTrueTasks] = useMutation(DELETE_TRUE_TASKS);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const sortedTasks = data?.getAllTasks
     .slice()
@@ -33,16 +30,19 @@ function Taskdone() {
 
   const handleDelete = () => {
     if (completedTasks.length > 0) {
-      deleteTrueTasks();
-      setIsSubmit(true);
-      setIsModalOpen(true);
+      try {
+        deleteTrueTasks();
+        const successMessage =
+          completedTasks.length > 1
+            ? "Toutes les tâches ont été supprimées avec succès"
+            : "La tâche a été supprimée avec succès";
+        refetch();
+        toast(successMessage, { type: "success" });
+      } catch (error) {
+        console.log("error", error);
+        toast(`Echec : ${error}`, { type: "error" });
+      }
     }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsSubmit(false);
-    refetch();
   };
 
   return (
@@ -73,15 +73,6 @@ function Taskdone() {
       >
         Tout supprimer
       </button>
-
-      {isModalOpen && isSubmit && (
-        <div>
-          <Modale
-            message="Les tâches terminées ont bien été supprimées !"
-            onClose={handleCloseModal}
-          />
-        </div>
-      )}
     </section>
   );
 }

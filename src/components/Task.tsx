@@ -1,9 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TASK } from "../GraphQL/Mutation";
 import { GET_ALL_TASKS } from "../GraphQL/Queries";
-
-import { useState } from "react";
-import Modale from "./Modale";
+import { toast } from "react-toastify";
 
 interface Task {
   _id: string;
@@ -28,24 +26,21 @@ function Task({ task }: TaskProps) {
   });
 
   const { refetch } = useQuery(GET_ALL_TASKS);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
 
-  const handleTaskCompletion = (task: Task) => {
-    setIsSubmit(true);
-    setIsModalOpen(true);
-    updateTask({
-      variables: {
-        id: task._id,
-        status: true,
-      },
-    });
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsSubmit(false);
-    refetch();
+  const handleTaskCompletion = async (task: Task) => {
+    try {
+      await updateTask({
+        variables: {
+          id: task._id,
+          status: true,
+        },
+      });
+      refetch();
+      toast("Tâche validée avec succès", { type: "success" });
+    } catch (error) {
+      console.log("error", error);
+      toast(`Echec : ${error}`, { type: "error" });
+    }
   };
 
   return (
@@ -86,14 +81,6 @@ function Task({ task }: TaskProps) {
           )}
         </div>
       </li>
-      {isModalOpen && isSubmit && (
-        <div>
-          <Modale
-            message="La tâche a bien été validée !"
-            onClose={handleCloseModal}
-          />
-        </div>
-      )}
     </>
   );
 }

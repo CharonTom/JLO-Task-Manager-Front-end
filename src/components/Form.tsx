@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TASK } from "../GraphQL/Mutation";
 import { GET_ALL_TAGS, GET_ALL_TASKS } from "../GraphQL/Queries";
-import Modale from "./Modale";
+import { toast } from "react-toastify";
 
 interface Tag {
   _id: string;
@@ -21,8 +21,6 @@ function Form() {
 
   const [formValues, setFormvalues] = useState(initialValues);
   const [error, setError] = useState<string | null>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const [createTask] = useMutation(CREATE_TASK);
 
@@ -60,21 +58,20 @@ function Form() {
     }
     setFormvalues(initialValues);
     setError(null);
-    setIsSubmit(true);
-    setIsModalOpen(true);
 
-    await createTask({
-      variables: {
-        description: formValues.description,
-        tags: formValues.tags,
-      },
-    });
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsSubmit(false);
-    refetch();
+    try {
+      await createTask({
+        variables: {
+          description: formValues.description,
+          tags: formValues.tags,
+        },
+      });
+      refetch();
+      toast("Tâche créée avec succès", { type: "success" });
+    } catch (error) {
+      console.log("error", error);
+      toast(`Echec : ${error}`, { type: "error" });
+    }
   };
 
   return (
@@ -131,14 +128,6 @@ function Form() {
           Créer une tâche
         </button>
       </form>
-      {isModalOpen && isSubmit && (
-        <div>
-          <Modale
-            message="La tâche a bien été ajoutée !"
-            onClose={handleCloseModal}
-          />
-        </div>
-      )}
     </div>
   );
 }
