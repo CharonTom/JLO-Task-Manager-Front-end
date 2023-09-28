@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-const ThemeSelector = () => {
+function ThemeSelector() {
   const { toggleTheme } = useContext(ThemeContext);
 
   const handleThemeChange = (newTheme: string) => {
@@ -24,6 +24,6 @@ const ThemeSelector = () => {
       ></button>
     </div>
   );
-};
+}
 
 export default ThemeSelector;

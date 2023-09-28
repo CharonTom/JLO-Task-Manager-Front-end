@@ -9,10 +9,9 @@ interface Tag {
   colorCode: string;
   name: string;
 }
-
 function Form() {
-  const { data } = useQuery(GET_ALL_TAGS); // On récupère les tags dans la DBB
-  const { refetch } = useQuery(GET_ALL_TASKS); // On récupère les tags dans la DBB
+  const { data } = useQuery(GET_ALL_TAGS); // On récupère les tags dans la BDD
+  const { refetch } = useQuery(GET_ALL_TASKS); // On récupère les tags dans la BDD
 
   const initialValues = {
     description: "",
