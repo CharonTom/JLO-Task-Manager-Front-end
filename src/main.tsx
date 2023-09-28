@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ApolloProvider client={client}>
       <ThemeProvider>
         <App />
-        <ToastContainer />
+        <ToastContainer position="bottom-right" theme="colored" />
       </ThemeProvider>
     </ApolloProvider>
   </React.StrictMode>
