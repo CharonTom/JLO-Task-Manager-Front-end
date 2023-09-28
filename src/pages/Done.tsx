@@ -28,10 +28,10 @@ function Taskdone() {
 
   const completedTasks = sortedTasks?.filter((task: Task) => task.status);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (completedTasks.length > 0) {
       try {
-        deleteTrueTasks();
+        await deleteTrueTasks();
         const successMessage =
           completedTasks.length > 1
             ? "Toutes les tâches ont été supprimées avec succès"
