@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { UPDATE_TASK } from "../GraphQL/Mutation";
-import { GET_ALL_TASKS } from "../GraphQL/Queries";
 import { toast } from "react-toastify";
 
 interface Task {
@@ -21,11 +20,7 @@ interface TaskProps {
 }
 
 function Task({ task }: TaskProps) {
-  const [updateTask] = useMutation(UPDATE_TASK, {
-    fetchPolicy: "no-cache", // La page se rafraichit automatiquement ce qui fait sauté la modale. Empécher le cache permet que la page ne se rafraichisse pas
-  });
-
-  const { refetch } = useQuery(GET_ALL_TASKS);
+  const [updateTask] = useMutation(UPDATE_TASK);
 
   const handleTaskCompletion = async (task: Task) => {
     try {
@@ -35,7 +30,6 @@ function Task({ task }: TaskProps) {
           status: true,
         },
       });
-      refetch();
       toast("Tâche validée avec succès", { type: "success" });
     } catch (error) {
       console.log("error", error);

@@ -10,8 +10,8 @@ interface Tag {
   name: string;
 }
 function Form() {
-  const { data } = useQuery(GET_ALL_TAGS); // On récupère les tags dans la BDD
-  const { refetch } = useQuery(GET_ALL_TASKS); // On récupère les tags dans la BDD
+  const { data } = useQuery(GET_ALL_TAGS);
+  const { refetch } = useQuery(GET_ALL_TASKS);
 
   const initialValues = {
     description: "",

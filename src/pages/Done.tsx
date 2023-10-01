@@ -51,7 +51,7 @@ function Taskdone() {
       {loading && <p className="text-center">Loading...</p>}
       {error && (
         <p className="text-center text-red-700">
-          Nous rencontrons un problème de connection avec le serveur
+          Nous rencontrons un problème de connexion avec le serveur
         </p>
       )}
       {completedTasks?.length === 0 ? (
