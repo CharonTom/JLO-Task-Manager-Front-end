@@ -1,7 +1,9 @@
 # Réalisation d'un gestionnaire de tâche (Front part)
 Le back se trouve ici : [JLO-Task-Manager-Back-end](https://github.com/CharonTom/JLO-Task-Manager-Back-end)
 
+<p align="center">
 <img src="https://github.com/CharonTom/my-website/blob/main/src/assets/img/task.png" alt="application sur pc et mobile" width="400"/>
+</p>
 
 Ce gestionnaire démarre par l’affichage d’une liste de tâches, avec un champ permettant d’ajouter de nouvelles tâches. D’autres fonctionnalités viennent ensuite compléter l’application afin de la rendre plus aboutie et de couvrir différents aspects du développement.
 
