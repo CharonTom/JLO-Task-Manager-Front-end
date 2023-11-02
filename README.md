@@ -1,5 +1,7 @@
 # Réalisation d'un gestionnaire de tâche
 
+<img src="https://github.com/CharonTom/my-website/blob/main/src/assets/img/promptopia.png" alt="application sur pc et mobile" width="500"/>
+
 Ce gestionnaire démarre par l’affichage d’une liste de tâches, avec un champ permettant d’ajouter de nouvelles tâches. D’autres fonctionnalités viennent ensuite compléter l’application afin de la rendre plus aboutie et de couvrir différents aspects du développement.
 
 ### Critères de l'application :
