@@ -1,6 +1,8 @@
 # Réalisation d'un gestionnaire de tâche (Front part)
 Le back se trouve ici : [JLO-Task-Manager-Back-end](https://github.com/CharonTom/JLO-Task-Manager-Back-end)
 
+Vous pouvez tester l'application directement sur ce lien : https://ubiquitous-meringue-e3582c.netlify.app/
+
 <p align="center">
 <img src="https://github.com/CharonTom/my-website/blob/main/src/assets/img/task.png" alt="application sur pc et mobile" width="400"/>
 </p>
@@ -39,7 +41,4 @@ Ce gestionnaire démarre par l’affichage d’une liste de tâches, avec un cha
 - Entrer 'yarn dev' pour lancer le server
 - Rendez-vous sur http://localhost:5173/
 
-### Vous pouvez également tester l'application directement sur ce lien : https://ubiquitous-meringue-e3582c.netlify.app/
-
-Pour tester l'application vous devez lancer son back-end.
-Rendez-vous sur mon repo [JLO-Task-Manager-Back-end](https://github.com/CharonTom/JLO-Task-Manager-Back-end) et suivre ses instructions d'installation.
+Rendez-vous sur mon repo [JLO-Task-Manager-Back-end](https://github.com/CharonTom/JLO-Task-Manager-Back-end) pour voir la partie back.
