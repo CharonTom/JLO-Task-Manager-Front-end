@@ -39,7 +39,7 @@ Ce gestionnaire démarre par l’affichage d’une liste de tâches, avec un cha
 - Entrer 'yarn dev' pour lancer le server
 - Rendez-vous sur http://localhost:5173/
 
-Vous pouvez également visiter l'application directement sur ce lien : https://ubiquitous-meringue-e3582c.netlify.app/
+### Vous pouvez également tester l'application directement sur ce lien : https://ubiquitous-meringue-e3582c.netlify.app/
 
 Pour tester l'application vous devez lancer son back-end.
 Rendez-vous sur mon repo [JLO-Task-Manager-Back-end](https://github.com/CharonTom/JLO-Task-Manager-Back-end) et suivre ses instructions d'installation.
